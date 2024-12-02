@@ -7,16 +7,25 @@ public class EnemyCtrl : TungMonoBehaviour
 {
     [SerializeField] protected NavMeshAgent agent;
     public NavMeshAgent Agent => agent;
+    [SerializeField] protected Animator animator;
+    public Animator Animator => animator;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadAgent();
+        this.LoadAnimator();
     }
     protected virtual void LoadAgent()
     {
         if (this.agent != null) return;
         this.agent = GetComponent<NavMeshAgent>();
         Debug.Log(transform.name + " : LoadAgent", gameObject);
+    }
+    protected virtual void LoadAnimator()
+    {
+        if(this.animator != null) return;
+        this.animator = GameObject.Find("Model").GetComponent<Animator>();
+        Debug.Log(transform.name + " : LoadAnimator", gameObject);
     }
 }
