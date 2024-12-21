@@ -27,9 +27,11 @@ public class EnemyMoving : EnemyAbstract
     {
         this.pointDistance = Vector3.Distance(this.currentPoint, this.transform.parent.position);
         if (this.pointDistance > this.pointDistanceLimit) return;
+        this.enemyCtrl.Agent.isStopped = true;
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.time) return;
         this.timer = 0;
+        this.enemyCtrl.Agent.isStopped = false;
         this.RanPoint();
     }
     protected virtual void RanPoint()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyCtrl : TungMonoBehaviour
+public abstract class EnemyCtrl : PoolObj
 {
     [SerializeField] protected NavMeshAgent agent;
     public NavMeshAgent Agent => agent;
