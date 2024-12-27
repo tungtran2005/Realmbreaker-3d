@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletDespawn : Despawn<EffectCtrl>
+public class EffectDespawn : Despawn<EffectCtrl>
 {
     
 }
