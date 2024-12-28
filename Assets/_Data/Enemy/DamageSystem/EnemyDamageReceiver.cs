@@ -2,19 +2,19 @@ using UnityEngine;
 [RequireComponent (typeof(CapsuleCollider))]
 public class EnemyDamageReceiver : DamageReceiver
 {
+    [SerializeField] protected EnemyCtrl enemyCtrl;
     [SerializeField] protected CapsuleCollider capsuleCollider;
-    [SerializeField] protected EnemyDespawn despawn;
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadEnemyCtrl();
         this.LoadCollider();
-        this.LoaDespawn();
     }
-    protected virtual void LoaDespawn()
+    protected virtual void LoadEnemyCtrl()
     {
-        if (this.despawn != null) return;
-        this.despawn = transform.parent.GetComponentInChildren<EnemyDespawn>();
-        Debug.Log(transform.name + " : LoadDesapwn", gameObject);
+        if (this.enemyCtrl != null) return;
+        this.enemyCtrl = GetComponentInParent<EnemyCtrl>();
+        Debug.Log(transform.name + " : LoadEnemyCtrl", gameObject);
     }
     protected override void LoadCollider()
     {
@@ -28,6 +28,12 @@ public class EnemyDamageReceiver : DamageReceiver
     }
     protected override void OnDead()
     {
-        this.despawn.DoDespawn();
+        this.enemyCtrl.Agent.isStopped = true;
+        this.enemyCtrl.Animator.SetBool("isDead", this.isDead);
+        Invoke(nameof(this.DoDespawn), 3f);
+    }
+    protected virtual void DoDespawn()
+    {
+        this.enemyCtrl.Despawn.DoDespawn();
     }
 }

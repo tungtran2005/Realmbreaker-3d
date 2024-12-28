@@ -1993,8 +1993,8 @@ MonoBehaviour:
   currentHP: 10
   maxHP: 10
   isDead: 0
+  enemyCtrl: {fileID: 0}
   capsuleCollider: {fileID: 1559555690}
-  despawn: {fileID: 2141772687}
 --- !u!136 &1559555690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6175,9 +6175,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   lockCamera: 0
-  rightOffset: 0
+  rightOffset: 0.25
   defaultDistance: 2.5
-  height: 1.4
+  height: 1.5
   smoothFollow: 10
   xMouseSensitivity: 3
   yMouseSensitivity: 3
