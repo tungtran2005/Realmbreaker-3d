@@ -7,7 +7,6 @@ public class EnemyDespawn : Despawn<EnemyCtrl>
     protected override void LoadValue()
     {
         base.LoadValue();
-        this.timeLife = 60f;
-        this.currentTime = 60f;
+        this.isDespawnByTime = false;
     }
 }

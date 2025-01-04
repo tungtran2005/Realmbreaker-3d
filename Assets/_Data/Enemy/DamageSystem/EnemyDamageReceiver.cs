@@ -29,11 +29,27 @@ public class EnemyDamageReceiver : DamageReceiver
     protected override void OnDead()
     {
         this.enemyCtrl.Agent.isStopped = true;
+        this.capsuleCollider.enabled = false;
         this.enemyCtrl.Animator.SetBool("isDead", this.isDead);
         Invoke(nameof(this.DoDespawn), 3f);
+        this.RandItem();
     }
     protected virtual void DoDespawn()
     {
         this.enemyCtrl.Despawn.DoDespawn();
+    }
+    protected override void Reborn()
+    {
+        base.Reborn();
+        this.capsuleCollider.enabled = true;
+    }
+    protected virtual void RandItem()
+    {
+        InventoryManager.Instance.AddItem(ItemCode.ExpPlayer, 1);
+        int rand = Random.Range(0, 10);
+        if(rand >=0 && rand <= 5)
+        {
+            InventoryManager.Instance.AddItem(ItemCode.Health, 1);
+        }
     }
 }

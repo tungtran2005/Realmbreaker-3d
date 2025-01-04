@@ -1,19 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyReborning : TungMonoBehaviour
 {
-    [SerializeField] protected float timer = 0;
-    [SerializeField] protected float delay = 4f;
+    [SerializeField] protected float spawnSpeed = 4f;
     [SerializeField] protected int pointIndex = 0;
     [SerializeField] protected int maxSpawn = 10;
     [SerializeField] protected List<RebornPoint> rebornPoint = new List<RebornPoint>();
     [SerializeField] protected List<EnemyCtrl> spawnedEnemies = new List<EnemyCtrl>();
 
+    protected override void Start()
+    {
+        Invoke(nameof(this.CreateEnemy), this.spawnSpeed);
+    }
     private void FixedUpdate()
     {
-        this.CreateEnemy();
+        this.RemoveOnDead();
     }
     protected override void LoadComponents()
     {
@@ -29,15 +31,25 @@ public class EnemyReborning : TungMonoBehaviour
     }
     protected virtual void CreateEnemy()
     {
+        Invoke(nameof(this.CreateEnemy), spawnSpeed);
         if (this.spawnedEnemies.Count >= this.maxSpawn) return;
-        this.timer += Time.fixedDeltaTime;
-        if (this.timer < this.delay) return;
-        this.timer = 0;
+
         EnemyCtrl prefab = EnemySpawnerCtrl.Instance.Prefabs.GetRandom();
         this.pointIndex = GetRebornPoint();
         EnemyCtrl newEnemy = EnemySpawnerCtrl.Instance.Spawner.Spawn(prefab, this.rebornPoint[this.pointIndex].transform.position);
         newEnemy.gameObject.SetActive(true);
         this.spawnedEnemies.Add(newEnemy);
+    }
+    protected virtual void RemoveOnDead()
+    {
+        foreach(EnemyCtrl enemy in this.spawnedEnemies)
+        {
+            if (enemy.DamageReceiver.IsDead())
+            {
+                this.spawnedEnemies.Remove(enemy);
+                return;
+            }
+        }
     }
     protected virtual int GetRebornPoint()
     {
