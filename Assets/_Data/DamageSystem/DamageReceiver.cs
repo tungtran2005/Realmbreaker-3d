@@ -3,7 +3,11 @@ using UnityEngine;
 public abstract class DamageReceiver : TungMonoBehaviour
 {
     [SerializeField] protected int currentHP = 10;
+    public int CurrentHP => currentHP;
+
     [SerializeField] protected int maxHP = 10;
+    public int MaxHP => maxHP;
+
     [SerializeField] protected bool isDead = false;
     protected override void LoadComponents()
     {

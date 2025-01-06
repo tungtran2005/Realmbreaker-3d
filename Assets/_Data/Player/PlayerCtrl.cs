@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class PlayerCtrl : TungMonoBehaviour
+public class PlayerCtrl : TungSingleton<PlayerCtrl>
 {
     [SerializeField] protected PlayerThirdPersonCtrl playerThirdPersonCtrl;
     public PlayerThirdPersonCtrl PlayerThirdPersonCtrl => playerThirdPersonCtrl;
@@ -11,6 +11,12 @@ public class PlayerCtrl : TungMonoBehaviour
 
     [SerializeField] protected CrosshairPointer crosshairPointer;
     public CrosshairPointer CrosshairPointer => crosshairPointer;
+
+    [SerializeField] protected LevelByExpPlayer level;
+    public LevelByExpPlayer Level => level;
+
+    [SerializeField] protected DamageReceiver damageReceiver;
+    public DamageReceiver DamageReceiver => damageReceiver;
 
     [SerializeField] protected Rig aimingRig;
     public Rig AimingRig => aimingRig;
@@ -22,6 +28,8 @@ public class PlayerCtrl : TungMonoBehaviour
         this.LoadPlayerThirdPersonCtrl();
         this.LoadVThirdPersonCamera();
         this.LoadAimingRig();
+        this.LoadLevel();
+        this.LoadDamageReceiver();
     }
     protected virtual void LoaCrosshairPoint()
     {
@@ -46,5 +54,17 @@ public class PlayerCtrl : TungMonoBehaviour
         if(this.aimingRig != null) return;
         this.aimingRig = GetComponentInChildren<Rig>();
         Debug.Log(transform.name + " : LoadAimingRig", gameObject);
+    }
+    protected virtual void LoadLevel()
+    {
+        if(this.level != null) return;
+        this.level = GetComponentInChildren<LevelByExpPlayer>();
+        Debug.Log(transform.name + " : LoadLevel", gameObject);
+    }
+    protected virtual void LoadDamageReceiver()
+    {
+        if(this.damageReceiver != null) return;
+        this.damageReceiver = GetComponentInChildren<DamageReceiver>();
+        Debug.Log(transform.name + " : LoadDamageReceiver", gameObject);
     }
 }
