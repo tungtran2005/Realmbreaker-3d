@@ -30,6 +30,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         this.enemyCtrl.Agent.isStopped = true;
         this.capsuleCollider.enabled = false;
+        this.enemyCtrl.DamageSender.CapsuleCollider.enabled = false;
         this.enemyCtrl.Animator.SetBool("isDead", this.isDead);
         Invoke(nameof(this.DoDespawn), 3f);
         this.RandItem();
@@ -42,6 +43,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         base.Reborn();
         this.capsuleCollider.enabled = true;
+        this.enemyCtrl.DamageSender.CapsuleCollider.enabled = true;
     }
     protected virtual void RandItem()
     {

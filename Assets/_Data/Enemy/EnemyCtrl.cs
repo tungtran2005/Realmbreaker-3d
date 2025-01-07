@@ -11,6 +11,8 @@ public abstract class EnemyCtrl : PoolObj
     public Animator Animator => animator;
     [SerializeField] protected EnemyDamageReceiver damageReceiver;
     public EnemyDamageReceiver DamageReceiver => damageReceiver;
+    [SerializeField] protected EnemyDamageSender damageSender;
+    public EnemyDamageSender DamageSender => damageSender;
 
 
     protected override void LoadComponents()
@@ -19,6 +21,7 @@ public abstract class EnemyCtrl : PoolObj
         this.LoadAgent();
         this.LoadAnimator();
         this.LoadEnemyDamageReceiver();
+        this.LoadDamageSender();
     }
     protected virtual void LoadAgent()
     {
@@ -37,5 +40,11 @@ public abstract class EnemyCtrl : PoolObj
         if(this.damageReceiver != null) return;
         this.damageReceiver = GetComponentInChildren<EnemyDamageReceiver>();
         Debug.Log(transform.name + " : LoadEnemyDamageReceiver", gameObject);
+    }
+    protected virtual void LoadDamageSender()
+    {
+        if(this.damageSender != null) return;
+        this.damageSender = GetComponentInChildren<EnemyDamageSender>();
+        Debug.Log(transform.name + " : LoadDamageSender", gameObject);
     }
 }
