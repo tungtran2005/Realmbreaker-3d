@@ -4,6 +4,8 @@ public class GunShooting : TungMonoBehaviour
 {
     [SerializeField] protected FirePoint firePoint;
     [SerializeField] protected string effectName = "Bullet";
+    [SerializeField] protected string muzzleName = "Muzzle1";
+    [SerializeField] protected string soundName = "ShootingSFX";
     [SerializeField] protected float fireSpeed = 0.2f;
     [SerializeField] protected float timer = 0;
     private void FixedUpdate()
@@ -17,13 +19,29 @@ public class GunShooting : TungMonoBehaviour
         if (this.timer < this.fireSpeed) return;
         this.timer = 0;
         this.SpawnBullet(firePoint);
+        this.SpawnMuzzle(firePoint);
+        this.SpawnSound(firePoint);
     }
     protected virtual EffectCtrl SpawnBullet(FirePoint firePoint)
     {
-        EffectCtrl prefab = EffectSpawnerCtrl.Instance.Prefabs.GetByName(effectName);
+        EffectCtrl prefab = EffectSpawnerCtrl.Instance.Prefabs.GetByName(this.effectName);
         EffectCtrl newEffect = EffectSpawnerCtrl.Instance.Spawner.Spawn(prefab,firePoint.transform.position,firePoint.transform.rotation);
         newEffect.gameObject.SetActive(true);
         return newEffect;
+    }
+    protected virtual EffectCtrl SpawnMuzzle(FirePoint firePoint)
+    {
+        EffectCtrl prefab = EffectSpawnerCtrl.Instance.Prefabs.GetByName(this.muzzleName);
+        EffectCtrl newEffect = EffectSpawnerCtrl.Instance.Spawner.Spawn(prefab, firePoint.transform.position, firePoint.transform.rotation);
+        newEffect.gameObject.SetActive(true);
+        return newEffect;
+    }
+    protected virtual SoundCtrl SpawnSound(FirePoint firePoint)
+    {
+        SoundCtrl prefab = SoundSpawnerCtrl.Instance.Prefabs.GetByName(this.soundName);
+        SoundCtrl newSound = SoundSpawnerCtrl.Instance.Spawner.Spawn(prefab, firePoint.transform.position);
+        newSound.gameObject.SetActive(true);
+        return newSound;
     }
     protected override void LoadComponents()
     {
