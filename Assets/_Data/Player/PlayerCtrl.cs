@@ -15,8 +15,8 @@ public class PlayerCtrl : TungSingleton<PlayerCtrl>
     [SerializeField] protected LevelByExpPlayer level;
     public LevelByExpPlayer Level => level;
 
-    [SerializeField] protected DamageReceiver damageReceiver;
-    public DamageReceiver DamageReceiver => damageReceiver;
+    [SerializeField] protected PlayerDamageReceiver damageReceiver;
+    public PlayerDamageReceiver DamageReceiver => damageReceiver;
 
     [SerializeField] protected Rig aimingRig;
     public Rig AimingRig => aimingRig;
@@ -64,7 +64,7 @@ public class PlayerCtrl : TungSingleton<PlayerCtrl>
     protected virtual void LoadDamageReceiver()
     {
         if(this.damageReceiver != null) return;
-        this.damageReceiver = GetComponentInChildren<DamageReceiver>();
+        this.damageReceiver = GetComponentInChildren<PlayerDamageReceiver>();
         Debug.Log(transform.name + " : LoadDamageReceiver", gameObject);
     }
 }

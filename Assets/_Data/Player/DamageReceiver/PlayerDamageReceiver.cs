@@ -23,5 +23,11 @@ public class PlayerDamageReceiver : DamageReceiver
     {
         GameOverManager.Instance.GameOver();
     }
-
+    public virtual bool Healing(int hp)
+    {
+        if(this.currentHP == this.maxHP) return false;
+        this.currentHP += hp;
+        if(this.currentHP > this.maxHP) this.currentHP = this.maxHP;
+        return true;
+    }
 }
