@@ -21,6 +21,7 @@ public class PlayerDamageReceiver : DamageReceiver
 
     protected override void OnDead()
     {
-        this.currentHP = this.maxHP;
+        GameOverManager.Instance.GameOver();
     }
+
 }
