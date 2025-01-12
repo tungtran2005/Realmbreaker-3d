@@ -26,6 +26,15 @@ public class EnemyDamageReceiver : DamageReceiver
         this.capsuleCollider.height = 2f;
         Debug.Log(transform.name + " : LoadCollider", gameObject);
     }
+    public override void Deduct(int damage)
+    {
+        base.Deduct(damage);
+        this.LoadHitStatus();
+    }
+    protected virtual void LoadHitStatus()
+    {
+        this.enemyCtrl.Animator.SetTrigger("Hit");
+    }
     protected override void OnDead()
     {
         this.enemyCtrl.Agent.isStopped = true;

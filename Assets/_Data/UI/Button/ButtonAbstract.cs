@@ -25,5 +25,5 @@ public abstract class ButtonAbstract : TungMonoBehaviour
     {
         this.button.onClick.AddListener(this.OnClick);
     }
-    protected abstract void OnClick();
+    public abstract void OnClick();
 }

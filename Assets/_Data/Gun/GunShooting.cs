@@ -38,9 +38,7 @@ public class GunShooting : TungMonoBehaviour
     }
     protected virtual SoundCtrl SpawnSound(FirePoint firePoint)
     {
-        SoundCtrl prefab = SoundSpawnerCtrl.Instance.Prefabs.GetByName(this.soundName);
-        SoundCtrl newSound = SoundSpawnerCtrl.Instance.Spawner.Spawn(prefab, firePoint.transform.position);
-        newSound.gameObject.SetActive(true);
+        SoundCtrl newSound = SoundManager.Instance.CreateSfx(this.soundName, firePoint.transform.position);
         return newSound;
     }
     protected override void LoadComponents()

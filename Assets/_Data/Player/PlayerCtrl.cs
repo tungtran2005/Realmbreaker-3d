@@ -20,6 +20,8 @@ public class PlayerCtrl : TungSingleton<PlayerCtrl>
 
     [SerializeField] protected Rig aimingRig;
     public Rig AimingRig => aimingRig;
+    [SerializeField] protected PlayerHealing playerHealing;
+    public PlayerHealing PlayerHealing => playerHealing;
 
     protected override void LoadComponents()
     {
@@ -30,6 +32,7 @@ public class PlayerCtrl : TungSingleton<PlayerCtrl>
         this.LoadAimingRig();
         this.LoadLevel();
         this.LoadDamageReceiver();
+        this.loadPlayerHealing();
     }
     protected virtual void LoaCrosshairPoint()
     {
@@ -66,5 +69,11 @@ public class PlayerCtrl : TungSingleton<PlayerCtrl>
         if(this.damageReceiver != null) return;
         this.damageReceiver = GetComponentInChildren<PlayerDamageReceiver>();
         Debug.Log(transform.name + " : LoadDamageReceiver", gameObject);
+    }
+    protected virtual void loadPlayerHealing()
+    {
+        if(this.playerHealing != null) return;
+        this.playerHealing = GetComponentInChildren<PlayerHealing>();
+        Debug.Log(transform.name + " : loadPlayerHealing", gameObject);
     }
 }
