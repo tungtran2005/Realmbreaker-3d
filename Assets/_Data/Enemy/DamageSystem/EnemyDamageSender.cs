@@ -44,4 +44,9 @@ public class EnemyDamageSender : DamageSender
         this.capsuleCollider.height = 2f;
         Debug.Log(transform.name + " : LoaCollider", gameObject);
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.damage = 15;
+    }
 }

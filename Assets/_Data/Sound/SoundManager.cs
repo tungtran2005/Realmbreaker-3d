@@ -9,15 +9,6 @@ public class SoundManager : TungSingleton<SoundManager>
     [Range(0f, 1f)]
     [SerializeField] protected float volumeSfx = 1f;
     [SerializeField] protected List<SFXCtrl> listSfx;
-    private void FixedUpdate()
-    {
-        this.VolumeSfxUpdating(volumeSfx);
-    }
-    protected override void Awake()
-    {
-        base.Awake();
-        DontDestroyOnLoad(gameObject);
-    }
     protected override void LoadComponents()
     {
         base.LoadComponents();

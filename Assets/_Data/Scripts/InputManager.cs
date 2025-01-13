@@ -6,12 +6,15 @@ public class InputManager : TungSingleton<InputManager>
     public bool AttackChecking => attackChecking;
     [SerializeField] protected bool isHealing = false;
     public bool IsHealing => isHealing;
+    [SerializeField] protected bool isToggleSetting = false;
+    public bool IsToggleSetting => isToggleSetting;
 
 
     private void Update()
     {
         this.CheckInput();
         this.CheckHealing();
+        this.CheckToggleSetting();
     }
     protected virtual void CheckInput()
     {
@@ -20,5 +23,9 @@ public class InputManager : TungSingleton<InputManager>
     protected virtual void CheckHealing()
     {
         this.isHealing = Input.GetKeyDown(KeyCode.Alpha5);
+    }
+    protected virtual void CheckToggleSetting()
+    {
+        this.isToggleSetting = Input.GetKeyDown(KeyCode.N);
     }
 }

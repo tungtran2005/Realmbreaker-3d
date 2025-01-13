@@ -27,6 +27,7 @@ public class GameOverManager : TungSingleton<GameOverManager>
     protected virtual void HideCanvas()
     {
         this.gameOverCanvas.SetActive(false);
+        this.isShow = false;
     }
     public virtual void GameOver()
     {
